@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="form-container">
+        <form action="/signup" method="post">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" value="<%= locals.oldInput ? oldInput.username : "" %>">
+            <%- include('partials/form-error', { errors: locals.errors, pathName: 'username'}) %>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="<%= locals.oldInput ? oldInput.email : "" %>">
+            <%- include('partials/form-error', { errors: locals.errors, pathName: 'email'}) %>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+            <%- include('partials/form-error', { errors: locals.errors, pathName: 'password'}) %>
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword">
+            <%- include('partials/form-error', { errors: locals.errors, pathName: 'confirmPassword'}) %>
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
+</body>
+</html>
