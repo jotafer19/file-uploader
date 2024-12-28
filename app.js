@@ -8,8 +8,10 @@ const { PrismaClient } = require("@prisma/client");
 require("dotenv").config();
 
 // Routes import
-const signUpRouter = require('./routes/signUpRouter')
-
+const homeRouter = require("./routes/homeRouter");
+const loginRouter = require("./routes/loginRouter");
+const signUpRouter = require("./routes/signUpRouter");
+const logoutRouter = require("./routes/logoutRouter");
 // App init
 const app = express();
 
@@ -46,22 +48,24 @@ app.use((req, res, next) => {
   next();
 });
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 async function main() {
-  const users = await prisma.user.findMany()
-  console.log(users)
+  const users = await prisma.user.findMany();
+  console.log(users);
 }
 
 main()
 
-app.get("/", (req, res) => res.render('login'))
-app.use('/signup', signUpRouter)
+app.get("/", homeRouter);
+app.use("/login", loginRouter);
+app.use("/signup", signUpRouter);
+app.use("/logout", logoutRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
   res.status(500).send(err);
 });
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening at port ${PORT}!`));

@@ -7,11 +7,14 @@
 </head>
 <body>
     <div class="form-container">
-        <form action="/" method="post">
+        <form action="/login" method="post">
             <label for="email">Email</label>
             <input type="text" name="email" id="email">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            <% if (locals.flashMessages.error) { %>
+                <span><%= locals.flashMessages.error %></span>
+            <% } %>
             <button type="submit">Login</button>
         </form>
     </div>
